@@ -19,6 +19,37 @@ const server = net.createServer(function(request) {
     let reqFile = firstLineElements[1];
     console.log("reqFile: ", reqFile);
 
+
+    let date = new Date().toUTCString();
+    //console.log("date: ", date);
+    let body = null;
+    if(reqMethod==="GET"){
+      switch (reqFile){
+        //case "undefined"
+
+        case "/":
+            body = uriContent.getIndex();
+            break;
+        case "/index.html":
+            body = uriContent.getIndex();
+            break;
+        case "/hydrogen.html":
+            body = uriContent.getHydrogen();
+            break;
+        case "/helium.html":
+            body = uriContent.getHelium();
+            break;
+        case "/css/styles.css":
+            body = uriContent.getStyles();
+            break;
+        default:
+            body = uriContent.get404();
+      }
+    }else{
+      body = uriContent.get404();
+    }
+
+  });
 });
 
 server.listen(port, function(){
