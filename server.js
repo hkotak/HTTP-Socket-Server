@@ -49,6 +49,10 @@ const server = net.createServer(function(request) {
       body = uriContent.get404();
     }
 
+
+    request.write(`HTTP/1.1 200 OK\nServer: Harsh 'n Chaz's Server\nDate: ${date}\n\n${body}`);
+
+    request.end();
   });
 });
 
